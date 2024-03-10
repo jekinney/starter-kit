@@ -1,8 +1,11 @@
 <script setup>
-import { Link, router } from '@inertiajs/vue3'
-import { Bars3Icon, XMarkIcon } from '@heroicons/vue/24/outline'
-import { Disclosure, DisclosurePanel, DisclosureButton, Menu, MenuItem, MenuItems, MenuButton, } from '@headlessui/vue'
+import { Link, router } from '@inertiajs/vue3';
+import { Bars3Icon, XMarkIcon } from '@heroicons/vue/24/outline';
+import { Disclosure, DisclosurePanel, DisclosureButton, Menu, MenuItem, MenuItems, MenuButton, } from '@headlessui/vue';
 
+const logout = () => {
+    router.post(route('logout'))
+}
 </script>
 
 <template>
@@ -10,9 +13,8 @@ import { Disclosure, DisclosurePanel, DisclosureButton, Menu, MenuItem, MenuItem
         <div class="mx-auto max-w-7xl px-8">
             <div class="flex h-16 justify-between relative">
                 <div class="flex grow">
-
                     <div class="flex items-center sm:mr-6">
-                        <Link href="#" class="font-bold font-mono text-lg">
+                        <Link :href="route('home')" class="font-bold font-mono text-lg">
                             {{  $page.props.config['app.name'] }}
                         </Link>
                     </div>
@@ -20,31 +22,43 @@ import { Disclosure, DisclosurePanel, DisclosureButton, Menu, MenuItem, MenuItem
                     <div class="flex justify-between w-full">
 
                         <div class="hidden sm:flex sm:ml-6 space-x-8">
-                            <Link href="" class="inline-flex items-center border-b-2 border-transparent hover:border-gray-200 text-sm font-medium text-gray-900">
+                            <Link
+                                :href="route('home')"
+                                class="inline-flex items-center border-b-2 border-transparent hover:border-gray-200 text-sm font-medium text-gray-900"
+                            >
                                 Home
                             </Link>
-                            <Link href="" class="inline-flex items-center border-b-2 border-transparent hover:border-gray-200 text-sm font-medium text-gray-900">
+                            <Link
+                                :href="route('dashboard')"
+                                class="inline-flex items-center border-b-2 border-transparent hover:border-gray-200 text-sm font-medium text-gray-900"
+                            >
                                 Dashboard
                             </Link>
                         </div>
 
-                        <!-- <div class="hidden sm:flex sm:ml-6 space-x-8">
-                            <Link href="" class="inline-flex items-center border-b-2 border-transparent text-sm font-medium text-gray-900">
-                                Register
+                        <div v-if="!$page.props.auth.user" class="hidden sm:flex sm:ml-6 space-x-8">
+                            <Link
+                                v-if="$page.props.features.registration"
+                                :href="route('auth.register')"
+                                class="inline-flex items-center border-b-2 border-transparent text-sm font-medium text-gray-900"
+                            >
+                                Create an Account
                             </Link>
-                            <Link href="" class="inline-flex items-center border-b-2 border-transparent text-sm font-medium text-gray-900">
+                            <Link
+                                :href="route('auth.login')"
+                                class="inline-flex items-center border-b-2 border-transparent text-sm font-medium text-gray-900"
+                            >
                                 Login
                             </Link>
-                        </div> -->
-                    </div>
+                        </div>
 
+                    </div>
                 </div>
 
                 <div class="absolute inset-y-0 right-0 flex items-center space-x-3">
-
-                    <Menu as="div" class="relative mr-3">
+                    <Menu v-if="$page.props.auth.user" as="div" class="relative mr-3">
                         <MenuButton class="flex items-center text-sm space-x-3">
-                            <span class="font-medium text-grey-900">Jason</span>
+                            <span class="font-medium text-grey-900">{{  $page.props.auth.user.name }}</span>
                             <img src="https://ui-avatars.com/api/?name=Jason" alt="" class="h-8 w-8 rounded-full">
                         </MenuButton>
                         <MenuItems class="absolute right-0 z-10 mt-2 w-48 bg-white border border-b-slate-200 focus:outline-none">
@@ -59,9 +73,9 @@ import { Disclosure, DisclosurePanel, DisclosureButton, Menu, MenuItem, MenuItem
                                 </Link>
                             </MenuItem>
                             <MenuItem v-slot="{ active }">
-                                <Link href="" class="block px-4 py-2 text-sm text-grey-900" :class="{ 'bg-gray-100': active }">
+                                <button v-on:click="logout" class="block px-4 py-2 text-sm text-grey-900 text-left w-full" :class="{ 'bg-gray-100': active }">
                                     Sign Out
-                                </Link>
+                                </button>
                             </MenuItem>
                         </MenuItems>
                     </Menu>
@@ -77,14 +91,14 @@ import { Disclosure, DisclosurePanel, DisclosureButton, Menu, MenuItem, MenuItem
 
         <DisclosurePanel class="sm:hidden">
             <div class="spacey-1 pb-3">
-                <Link href="" class="block py-2 px-8 font-medium text-grey-900">Home</Link>
-                <Link href="" class="block py-2 px-8 font-medium text-grey-900">Dashboard</Link>
+                <Link :href="route('home')" class="block py-2 px-8 font-medium text-grey-900">Home</Link>
+                <Link :href="route('dashboard')" class="block py-2 px-8 font-medium text-grey-900">Dashboard</Link>
             </div>
-            <div class="spacey-1 pb-3">
-                <Link href="" class="block py-2 px-8 font-medium text-grey-900">
+            <div v-if="!$page.props.auth.user" class="spacey-1 pb-3">
+                <Link v-if="$page.props.features.registration" :href="route('auth.register')" class="block py-2 px-8 font-medium text-grey-900">
                     Register
                 </Link>
-                <Link href="" class="block py-2 px-8 font-medium text-grey-900">
+                <Link :href="route('auth.login')"  class="block py-2 px-8 font-medium text-grey-900">
                     Login
                 </Link>
             </div>
