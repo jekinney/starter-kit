@@ -12,7 +12,7 @@ import { Disclosure, DisclosurePanel, DisclosureButton, Menu, MenuItem, MenuItem
                 <div class="flex grow">
 
                     <div class="flex items-center sm:mr-6">
-                        <Link href="#" class="font-bold font-mono text-lg">
+                        <Link :href="route('home')" class="font-bold font-mono text-lg">
                             {{  $page.props.config['app.name'] }}
                         </Link>
                     </div>
@@ -20,29 +20,29 @@ import { Disclosure, DisclosurePanel, DisclosureButton, Menu, MenuItem, MenuItem
                     <div class="flex justify-between w-full">
 
                         <div class="hidden sm:flex sm:ml-6 space-x-8">
-                            <Link href="" class="inline-flex items-center border-b-2 border-transparent hover:border-gray-200 text-sm font-medium text-gray-900">
+                            <Link :href="route('home')" class="inline-flex items-center border-b-2 border-transparent hover:border-gray-200 text-sm font-medium text-gray-900">
                                 Home
                             </Link>
-                            <Link href="" class="inline-flex items-center border-b-2 border-transparent hover:border-gray-200 text-sm font-medium text-gray-900">
+                            <Link :href="route('dashboard')" class="inline-flex items-center border-b-2 border-transparent hover:border-gray-200 text-sm font-medium text-gray-900">
                                 Dashboard
                             </Link>
                         </div>
 
-                        <!-- <div class="hidden sm:flex sm:ml-6 space-x-8">
-                            <Link href="" class="inline-flex items-center border-b-2 border-transparent text-sm font-medium text-gray-900">
-                                Register
+                        <div class="hidden sm:flex sm:ml-6 space-x-8">
+                            <Link :href="route('auth.register')" class="inline-flex items-center border-b-2 border-transparent text-sm font-medium text-gray-900">
+                                Create an Account
                             </Link>
                             <Link href="" class="inline-flex items-center border-b-2 border-transparent text-sm font-medium text-gray-900">
                                 Login
                             </Link>
-                        </div> -->
-                    </div>
+                        </div>
 
+                    </div>
                 </div>
 
                 <div class="absolute inset-y-0 right-0 flex items-center space-x-3">
 
-                    <Menu as="div" class="relative mr-3">
+                    <!-- <Menu as="div" class="relative mr-3">
                         <MenuButton class="flex items-center text-sm space-x-3">
                             <span class="font-medium text-grey-900">Jason</span>
                             <img src="https://ui-avatars.com/api/?name=Jason" alt="" class="h-8 w-8 rounded-full">
@@ -64,7 +64,7 @@ import { Disclosure, DisclosurePanel, DisclosureButton, Menu, MenuItem, MenuItem
                                 </Link>
                             </MenuItem>
                         </MenuItems>
-                    </Menu>
+                    </Menu> -->
 
                     <DisclosureButton class="sm:hidden relative p-2 text-grey-900 hover:bg:background-grey-500">
                         <Bars3Icon v-if="!open" class="block h-6 w-6" />
@@ -77,8 +77,8 @@ import { Disclosure, DisclosurePanel, DisclosureButton, Menu, MenuItem, MenuItem
 
         <DisclosurePanel class="sm:hidden">
             <div class="spacey-1 pb-3">
-                <Link href="" class="block py-2 px-8 font-medium text-grey-900">Home</Link>
-                <Link href="" class="block py-2 px-8 font-medium text-grey-900">Dashboard</Link>
+                <Link :href="route('home')" class="block py-2 px-8 font-medium text-grey-900">Home</Link>
+                <Link :href="route('dashboard')" class="block py-2 px-8 font-medium text-grey-900">Dashboard</Link>
             </div>
             <div class="spacey-1 pb-3">
                 <Link href="" class="block py-2 px-8 font-medium text-grey-900">
