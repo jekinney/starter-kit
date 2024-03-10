@@ -2,8 +2,10 @@
 
 namespace App\Http\Middleware;
 
+use App\Http\Resources\Users\AuthUserResource;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
+use Laravel\Fortify\Features;
 
 class HandleInertiaRequests extends Middleware
 {
@@ -37,7 +39,9 @@ class HandleInertiaRequests extends Middleware
     public function share(Request $request): array
     {
         return array_merge(parent::share($request), [
-            'config' => config()->get(['app.name'])
+            'auth' => ['user' => $request->user()? new AuthUserResource($request->user()):null],
+            'config' => config()->get(['app.name']),
+            'features' => collect(config('fortify.features'))->mapWithKeys(fn ($key) => [$key => true]),
         ]);
     }
 }
