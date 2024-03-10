@@ -11,9 +11,8 @@ use Illuminate\Cache\RateLimiting\Limit;
 use App\Actions\Fortify\ResetUserPassword;
 use App\Actions\Fortify\UpdateUserPassword;
 use Illuminate\Support\Facades\RateLimiter;
-use Laravel\Fortify\Contracts\LoginResponse;
+use App\Http\Responses\LoginResponse;
 use App\Actions\Fortify\UpdateUserProfileInformation;
-use App\Http\Responses\LoginResponse as ResponsesLoginResponse;
 
 class FortifyServiceProvider extends ServiceProvider
 {
@@ -23,8 +22,8 @@ class FortifyServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->singleton(
-            LoginResponse::class,
-            ResponsesLoginResponse::class
+            \Laravel\Fortify\Contracts\LoginResponse::class,
+            LoginResponse::class
         );
     }
 

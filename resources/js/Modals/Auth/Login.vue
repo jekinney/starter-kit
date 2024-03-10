@@ -28,7 +28,6 @@ const form = useForm({
                         class="w-full py-2 text-gray-900 border-gray-300 text-sm"
                         step="1"
                         required="true"
-                        autofocus="true"
                         autocomplete="true"
                     />
                     <div v-if="form.errors.email" class="text-sm text-red-500 mt-2">

@@ -15,6 +15,8 @@ class LoginResponse implements LoginResponseContract
      */
     public function toResponse($request)
     {
-        return redirect()->intended(Fortify::redirects('login'))->with('toast', 'Welcome back ' . $request->user()->name);
+        return redirect()
+            ->intended(Fortify::redirects('login'))
+            ->with('toast', 'Welcome back ' . $request->user()->name);
     }
 }

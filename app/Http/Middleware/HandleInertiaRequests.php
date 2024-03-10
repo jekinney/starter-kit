@@ -40,6 +40,7 @@ class HandleInertiaRequests extends Middleware
     {
         return array_merge(parent::share($request), [
             'auth' => ['user' => $request->user()? new AuthUserResource($request->user()):null],
+            'toast' => session('toast'),
             'config' => config()->get(['app.name']),
             'features' => collect(config('fortify.features'))->mapWithKeys(fn ($key) => [$key => true]),
         ]);

@@ -29,7 +29,6 @@ const form = useForm({
                         class="w-full py-2 text-gray-900 border-gray-300 text-sm"
                         step="1"
                         required="true"
-                        autofocus="true"
                         autocomplete="true"
                     />
                     <div v-if="form.errors.name" class="text-sm text-red-500 mt-2">
@@ -84,7 +83,7 @@ const form = useForm({
                         class="w-full py-2 text-gray-900 border-gray-300 text-sm"
                         step="4"
                         required="true"
-                        autocomplete="true"
+                        autocomplete="false"
                     />
                     <div v-if="form.errors.password_confirmation" class="text-sm text-red-500 mt-2">
                         {{ form.errors.password_confirmation }}
