@@ -11,8 +11,10 @@ const logout = () => {
 <template>
     <Disclosure as="nav" class="border-b border-b-slate-200" v-slot="{ open }">
         <div class="mx-auto max-w-7xl px-8">
+
             <div class="flex h-16 justify-between relative">
                 <div class="flex grow">
+
                     <div class="flex items-center sm:mr-6">
                         <Link :href="route('home')" class="font-bold font-mono text-lg">
                             {{  $page.props.config['app.name'] }}
@@ -56,28 +58,32 @@ const logout = () => {
                 </div>
 
                 <div class="absolute inset-y-0 right-0 flex items-center space-x-3">
+
                     <Menu v-if="$page.props.auth.user" as="div" class="relative mr-3">
+
                         <MenuButton class="flex items-center text-sm space-x-3">
                             <span class="font-medium text-grey-900">{{  $page.props.auth.user.name }}</span>
                             <img src="https://ui-avatars.com/api/?name=Jason" alt="" class="h-8 w-8 rounded-full">
                         </MenuButton>
+
                         <MenuItems class="absolute right-0 z-10 mt-2 w-48 bg-white border border-b-slate-200 focus:outline-none">
                             <MenuItem v-slot="{ active, close }">
-                                <Link href="" class="block px-4 py-2 text-sm text-grey-900" :class="{ 'bg-gray-100': active }" v-on:mouseup="close">
+                                <Link :href="route('account.show')" class="block px-4 py-2 text-sm text-grey-900" :class="{ 'bg-gray-300': active }" >
                                     Account
                                 </Link>
                             </MenuItem>
                             <MenuItem v-slot="{ active, close }">
-                                <Link href="" class="block px-4 py-2 text-sm text-grey-900" :class="{ 'bg-gray-100': active }" v-on:mouseup="close">
+                                <Link :href="route('account.security')" class="block px-4 py-2 text-sm text-grey-900" :class="{ 'bg-gray-300': active }">
                                     Security
                                 </Link>
                             </MenuItem>
                             <MenuItem v-slot="{ active }">
-                                <button v-on:click="logout" class="block px-4 py-2 text-sm text-grey-900 text-left w-full" :class="{ 'bg-gray-100': active }">
+                                <button v-on:click="logout" class="block px-4 py-2 text-sm text-grey-900 text-left w-full" :class="{ 'bg-gray-300': active }">
                                     Sign Out
                                 </button>
                             </MenuItem>
                         </MenuItems>
+
                     </Menu>
 
                     <DisclosureButton class="sm:hidden relative p-2 text-grey-900 hover:bg:background-grey-500">
@@ -103,5 +109,6 @@ const logout = () => {
                 </Link>
             </div>
         </DisclosurePanel>
+
     </Disclosure>
 </template>
