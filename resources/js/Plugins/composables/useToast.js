@@ -4,7 +4,7 @@ const active = ref(false)
 
 const toastOptions = ref({
     body: '',
-    timeout: 2000
+    timeout: 10000
 })
 
 let timeout = null
@@ -28,13 +28,12 @@ export default () => {
     const hide = () => {
         clearInterval(timeout)
         active.value = false
-        toastOptions.value.body = ''
     }
 
     return {
-        hide,
-        body: computed(() => toastOptions.value.body),
         toast,
-        active
+        active,
+        hide,
+        body: computed(() => toastOptions.value.body)
     }
 }

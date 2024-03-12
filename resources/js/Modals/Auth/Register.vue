@@ -17,7 +17,7 @@ const form = useForm({
 
         <h2 class="text-center text-2xl font-bold font-mono text-gray-900 border-b-2 pd-2">Create an account</h2>
 
-        <form class="mt-6 space-y-6" v-on:submit.prevent="form.post(`register`)">
+        <form class="mt-6 space-y-6" v-on:submit.prevent="form.post(`/register`)">
 
             <div>
                 <label for="name" class="text-sm font-medium text-gray-900">Name</label>

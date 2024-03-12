@@ -12,6 +12,7 @@ use App\Actions\Fortify\ResetUserPassword;
 use App\Actions\Fortify\UpdateUserPassword;
 use Illuminate\Support\Facades\RateLimiter;
 use App\Http\Responses\LoginResponse;
+use App\Http\Responses\ProfileInformationUpdatedResponse;
 use App\Actions\Fortify\UpdateUserProfileInformation;
 
 class FortifyServiceProvider extends ServiceProvider
@@ -24,6 +25,16 @@ class FortifyServiceProvider extends ServiceProvider
         $this->app->singleton(
             \Laravel\Fortify\Contracts\LoginResponse::class,
             LoginResponse::class
+        );
+
+        $this->app->singleton(
+            \Laravel\Fortify\Contracts\ProfileInformationUpdatedResponse::class,
+            ProfileInformationUpdatedResponse::class
+        );
+
+        $this->app->singleton(
+            \App\Actions\Contracts\UpdatesUsersAvatar::class,
+            \App\Actions\Fortify\UpdateUsersAvatar::class
         );
     }
 
