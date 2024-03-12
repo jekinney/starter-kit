@@ -27,12 +27,14 @@ const logout = () => {
                             <Link
                                 :href="route('home')"
                                 class="inline-flex items-center border-b-2 border-transparent hover:border-gray-200 text-sm font-medium text-gray-900"
+                                :class="{ 'border-gray-500 hover:border-gray-500': $page.props.current == 'home' }"
                             >
                                 Home
                             </Link>
                             <Link
                                 :href="route('dashboard')"
                                 class="inline-flex items-center border-b-2 border-transparent hover:border-gray-200 text-sm font-medium text-gray-900"
+                                :class="{ 'border-gray-500 hover:border-gray-500': $page.props.current == 'dashboard' }"
                             >
                                 Dashboard
                             </Link>
@@ -62,23 +64,23 @@ const logout = () => {
                     <Menu v-if="$page.props.auth.user" as="div" class="relative mr-3">
 
                         <MenuButton class="flex items-center text-sm space-x-3">
-                            <span class="font-medium text-grey-900">{{  $page.props.auth.user.name }}</span>
+                            <span class="font-medium text-gray-900">{{  $page.props.auth.user.name }}</span>
                             <img src="https://ui-avatars.com/api/?name=Jason" alt="" class="h-8 w-8 rounded-full">
                         </MenuButton>
 
                         <MenuItems class="absolute right-0 z-10 mt-2 w-48 bg-white border border-b-slate-200 focus:outline-none">
                             <MenuItem v-slot="{ active, close }">
-                                <Link :href="route('account.show')" class="block px-4 py-2 text-sm text-grey-900" :class="{ 'bg-gray-300': active }" >
+                                <Link :href="route('account.show')" class="block px-4 py-2 text-sm text-gray-900" :class="{ 'bg-gray-300': active }" >
                                     Account
                                 </Link>
                             </MenuItem>
                             <MenuItem v-slot="{ active, close }">
-                                <Link :href="route('account.security')" class="block px-4 py-2 text-sm text-grey-900" :class="{ 'bg-gray-300': active }">
+                                <Link :href="route('account.security')" class="block px-4 py-2 text-sm text-gray-900" :class="{ 'bg-gray-300': active }">
                                     Security
                                 </Link>
                             </MenuItem>
                             <MenuItem v-slot="{ active }">
-                                <button v-on:click="logout" class="block px-4 py-2 text-sm text-grey-900 text-left w-full" :class="{ 'bg-gray-300': active }">
+                                <button v-on:click="logout" class="block px-4 py-2 text-sm text-gray-900 text-left w-full" :class="{ 'bg-gray-300': active }">
                                     Sign Out
                                 </button>
                             </MenuItem>
@@ -86,7 +88,7 @@ const logout = () => {
 
                     </Menu>
 
-                    <DisclosureButton class="sm:hidden relative p-2 text-grey-900 hover:bg:background-grey-500">
+                    <DisclosureButton class="sm:hidden relative p-2 text-gray-900 hover:bg:background-gray-500">
                         <Bars3Icon v-if="!open" class="block h-6 w-6" />
                         <XMarkIcon v-if="open" class="block h-6 w-6" />
                     </DisclosureButton>
@@ -97,14 +99,33 @@ const logout = () => {
 
         <DisclosurePanel class="sm:hidden">
             <div class="spacey-1 pb-3">
-                <Link :href="route('home')" class="block py-2 px-8 font-medium text-grey-900">Home</Link>
-                <Link :href="route('dashboard')" class="block py-2 px-8 font-medium text-grey-900">Dashboard</Link>
+                <Link
+                    :href="route('home')"
+                    class="block py-2 px-8 font-medium text-gray-900 border-l-2 border-transparent"
+                    :class="{ 'border-gray-500': $page.props.current == 'home' }"
+                >
+                    Home
+                </Link>
+                <Link
+                    :href="route('dashboard')"
+                    class="block py-2 px-8 font-medium text-gray-900 border-l-2 border-transparent"
+                    :class="{ 'border-gray-500': $page.props.current == 'dashboard' }"
+                >
+                    Dashboard
+                </Link>
             </div>
             <div v-if="!$page.props.auth.user" class="spacey-1 pb-3">
-                <Link v-if="$page.props.features.registration" :href="route('auth.register')" class="block py-2 px-8 font-medium text-grey-900">
+                <Link
+                    v-if="$page.props.features.registration"
+                    :href="route('auth.register')"
+                    class="block py-2 px-8 font-medium text-gray-900 border-l-2 border-transparent"
+                >
                     Register
                 </Link>
-                <Link :href="route('auth.login')"  class="block py-2 px-8 font-medium text-grey-900">
+                <Link
+                    :href="route('auth.login')"
+                    class="block py-2 px-8 font-medium text-gray-900 border-l-2 border-transparent"
+                >
                     Login
                 </Link>
             </div>

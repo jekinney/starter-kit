@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use App\Http\Resources\Users\AuthUserResource;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 use Inertia\Middleware;
 use Laravel\Fortify\Features;
 
@@ -42,6 +43,7 @@ class HandleInertiaRequests extends Middleware
             'auth' => ['user' => $request->user()? new AuthUserResource($request->user()):null],
             'toast' => session('toast'),
             'config' => config()->get(['app.name']),
+            'current' => Route::currentRouteName(),
             'features' => collect(config('fortify.features'))->mapWithKeys(fn ($key) => [$key => true]),
         ]);
     }

@@ -10,10 +10,22 @@ import { Link } from '@inertiajs/vue3';
                 <nav class="sm:border-r border-r-slate-200 h-full">
                     <ul class="space-y-1">
                         <li class="">
-                            <Link :href="route('account.show')" class="text-grey-900 flex p-2 pl-3 text-sm font-semibold">Profile Information</Link>
+                            <Link
+                                :href="route('account.show')"
+                                class="text-grey-900 flex p-2 pl-3 text-sm font-semibold"
+                                :class="{ 'bg-gray-100': $page.props.current === 'account.show' }"
+                            >
+                                Profile Information
+                            </Link>
                         </li>
                         <li class="">
-                            <Link :href="route('account.security')" class="text-grey-900 flex p-2 pl-3 text-sm font-semibold">Security</Link>
+                            <Link
+                                :href="route('account.security')"
+                                class="text-grey-900 flex p-2 pl-3 text-sm font-semibold"
+                                :class="{ 'bg-gray-100': $page.props.current === 'account.security' }"
+                            >
+                                Security
+                            </Link>
                         </li>
                     </ul>
                 </nav>
