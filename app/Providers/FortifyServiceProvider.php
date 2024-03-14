@@ -5,15 +5,16 @@ namespace App\Providers;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Laravel\Fortify\Fortify;
+use App\Http\Responses\LoginResponse;
 use App\Actions\Fortify\CreateNewUser;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Cache\RateLimiting\Limit;
 use App\Actions\Fortify\ResetUserPassword;
 use App\Actions\Fortify\UpdateUserPassword;
 use Illuminate\Support\Facades\RateLimiter;
-use App\Http\Responses\LoginResponse;
-use App\Http\Responses\ProfileInformationUpdatedResponse;
+use App\Http\Responses\PasswordUpdateResponse;
 use App\Actions\Fortify\UpdateUserProfileInformation;
+use App\Http\Responses\ProfileInformationUpdatedResponse;
 
 class FortifyServiceProvider extends ServiceProvider
 {
@@ -35,6 +36,11 @@ class FortifyServiceProvider extends ServiceProvider
         $this->app->singleton(
             \App\Actions\Contracts\UpdatesUsersAvatar::class,
             \App\Actions\Fortify\UpdateUsersAvatar::class
+        );
+
+        $this->app->singleton(
+            \Laravel\Fortify\Contracts\PasswordUpdateResponse::class,
+            PasswordUpdateResponse::class
         );
     }
 
